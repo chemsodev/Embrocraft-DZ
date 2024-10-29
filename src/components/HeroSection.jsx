@@ -26,7 +26,7 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-6 w-full flex justify-center">
+      <div className="absolute bottom-16 md:bottom-6 w-full flex justify-center">
         <span className="animate-bounce text-white text-3xl">↓</span>
       </div>
     </div>
