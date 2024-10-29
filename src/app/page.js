@@ -1,9 +1,10 @@
 import HeroSection from "../components/HeroSection";
+import ClothingStyles from "../components/ClothingStyles";
 export default function Home() {
   return (
     <div>
     <HeroSection/>
-    <h1>HHHHHHHHHHHHHHHHHHHH</h1>
+    <ClothingStyles/>
     </div>
   );
 }
