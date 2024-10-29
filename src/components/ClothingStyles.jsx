@@ -1,6 +1,6 @@
 export default function ClothingStyles() {
   return (
-    <div className="py-16 bg-white text-center"  id="clothing-styles">
+    <div className="py-16 bg-gray-100 text-center"  id="clothing-styles">
       <h2 className="text-4xl font-bold mb-12">Browse Clothing Styles</h2>
       <div className="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:space-x-6 px-4">
         <div className="border rounded-lg p-8 shadow-lg flex-1">

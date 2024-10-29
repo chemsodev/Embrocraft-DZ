@@ -16,7 +16,7 @@ export default function HeroSection() {
 
   return (
     <div
-      className="relative h-[60vh] md:h-[75vh] lg:h-screen flex items-center justify-center bg-center bg-cover text-white"
+      className="relative h-[60vh] md:h-[75vh] lg:h-screen flex items-center justify-center bg-center bg-cover text-gray-100"
       style={{ backgroundImage: "url(/images/hero-bg.jpg)" }}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -34,7 +34,7 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row sm:justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
           <Link
             href="/design"
-            className="bg-[#8C2F39] hover:bg-[#B23A48] text-white font-semibold py-3 px-6 sm:py-4 sm:px-8 text-lg sm:text-xl rounded-md text-center transform transition-transform duration-200 hover:scale-105"
+            className="bg-[#8C2F39] hover:bg-[#B23A48] text-gray-100 font-semibold py-3 px-6 sm:py-4 sm:px-8 text-lg sm:text-xl rounded-md text-center transform transition-transform duration-200 hover:scale-105"
           >
             Start Designing
           </Link>
