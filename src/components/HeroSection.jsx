@@ -23,7 +23,7 @@ export default function HeroSection() {
 
       <div className="relative z-10 text-center md:text-left px-4 md:px-10 space-y-4 md:space-y-8">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-          Rital for Embroidery Clothing:
+        Embroidery DZ:
           <br className="hidden md:block" /> Design Your Own
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed">
