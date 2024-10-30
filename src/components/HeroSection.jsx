@@ -3,9 +3,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Loading from "../components/Loading";
 import Image from "next/image";
-import { FiMenu } from "react-icons/fi"; 
+import { FiMenu } from "react-icons/fi";
 
 export default function HeroSection() {
+  const handleContactClick = () => {
+    toggleMenu();
+    scrollToSection("#footer");
+  };
+
   const [isLoading, setIsLoading] = useState(true);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,6 +36,14 @@ export default function HeroSection() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const scrollToSection = (sectionId) => {
+    const section = document.querySelector(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false); 
+    }
+  };
+
   if (isLoading) return <Loading />;
 
   return (
@@ -54,7 +67,7 @@ export default function HeroSection() {
           width={3464}
           height={3464}
           className="rounded-full w-12 h-12 md:w-20 md:h-20 lg:w-24 lg:h-24"
-          priority 
+          priority
         />
       </div>
 
@@ -69,24 +82,24 @@ export default function HeroSection() {
         <div className="absolute top-2 inset-x-0 flex justify-center">
           <div className="bg-black/20 backdrop-blur-lg px-6 py-2 rounded-lg">
             <nav className="flex space-x-8 text-lg font-semibold text-gray-200">
-              <Link
-                href="/"
-                className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4"
-              >
+              <Link href="/" className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4">
                 Home
               </Link>
-              <Link
-                href="/design"
-                className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4"
-              >
+              <Link href="/design" className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4">
                 Design
               </Link>
-              <Link
-                href="#clothing-styles"
+              <button
+                onClick={() => scrollToSection("#clothing-styles")}
                 className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4"
               >
                 Styles
-              </Link>
+              </button>
+              <button
+                onClick={handleContactClick} // Updated to call handleContactClick
+                className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4"
+              >
+                Contact
+              </button>
             </nav>
           </div>
         </div>
@@ -95,40 +108,36 @@ export default function HeroSection() {
       {isSmallScreen && isMenuOpen && (
         <div className="absolute top-14 right-1 bg-black/20 backdrop-blur-lg p-4 rounded-lg z-10">
           <nav className="flex flex-col space-y-4 text-lg font-semibold text-gray-200">
-            <Link
-              href="/"
-              className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4"
-              onClick={toggleMenu}
-            >
+            <Link href="/" className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4" onClick={toggleMenu}>
               Home
             </Link>
-            <Link
-              href="/design"
-              className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4"
-              onClick={toggleMenu}
-            >
+            <Link href="/design" className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4" onClick={toggleMenu}>
               Design
             </Link>
-            <Link
-              href="#clothing-styles"
+            <button
+              onClick={() => scrollToSection("#clothing-styles")}
               className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4"
-              onClick={toggleMenu}
             >
               Styles
-            </Link>
+            </button>
+            <button
+              onClick={handleContactClick} 
+              className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4"
+            >
+              Contact
+            </button>
           </nav>
         </div>
       )}
 
-      <div className="relative text-center md:text-left px-2 md:px-10  w-[100%] md:w-[70%] lg:w-[50%] mx-auto">
+      <div className="relative text-center md:text-left px-2 md:px-10 w-[100%] md:w-[70%] lg:w-[50%] mx-auto">
         <div className="bg-black/5 p-6 rounded-lg relative z-0 w-[100%] flex flex-col gap-4">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
             Embroidery DZ:
             <br className="hidden md:block" /> Design Your Own
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed">
-            Elevate your style with our custom embroidery clothing! Unleash your
-            creativity and design your unique piece.
+            Elevate your style with our custom embroidery clothing! Unleash your creativity and design your unique piece.
           </p>
 
           <div className="flex flex-col sm:flex-row sm:justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
@@ -137,13 +146,13 @@ export default function HeroSection() {
               className={`bg-[#8C2F39] text-gray-100 font-semibold py-3 px-6 sm:py-4 sm:px-8 text-lg sm:text-xl rounded-md text-center transform transition-transform duration-200 ${
                 isSmallScreen
                   ? "active:scale-105"
-                  : "lg:hover:scale-105 lg:hover:bg-[#B23A48]" 
+                  : "lg:hover:scale-105 lg:hover:bg-[#B23A48]"
               }`}
             >
               Start Designing
             </Link>
-            <Link
-              href="#clothing-styles"
+            <button
+              onClick={() => scrollToSection("#clothing-styles")}
               className={`bg-[#F1C232] border-2 border-[#8C2F39] text-[#8C2F39] font-semibold py-3 px-6 sm:py-4 sm:px-8 text-lg sm:text-xl rounded-md text-center transform transition-transform duration-200 ${
                 isSmallScreen
                   ? "active:scale-105"
@@ -151,7 +160,7 @@ export default function HeroSection() {
               }`}
             >
               Browse Styles
-            </Link>
+            </button>
           </div>
         </div>
       </div>

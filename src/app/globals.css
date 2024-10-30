@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes twitch {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    75% { transform: translateX(-1px); }
+  }
+  
+  .icon-twitch {
+    animation: twitch 0.2s ease-in-out;
+    animation-iteration-count: 3;
+  }
+  
