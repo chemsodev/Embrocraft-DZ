@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaInstagram, FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa'; // Import WhatsApp icon
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -51,6 +51,9 @@ export default function Footer() {
             </Link>
             <Link href="tel:0791084298" aria-label="Phone" target="_blank" rel="noopener noreferrer">
               <FaPhone className={`fill-green-500 hover:fill-gray-400 h-6 w-6 ${twitch ? 'icon-twitch' : ''}`} />
+            </Link>
+            <Link href="https://wa.me/0540207506" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp className={`fill-green-500 hover:fill-gray-400 h-6 w-6 ${twitch ? 'icon-twitch' : ''}`} />
             </Link>
           </div>
         </div>
