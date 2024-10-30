@@ -43,15 +43,15 @@ export default function Footer() {
           </nav>
 
           <div className="flex space-x-4 items-center" id="footer">
-            <Link href="https://www.instagram.com/brahim_mrz_store/" aria-label="Instagram">
+            <Link href="https://www.instagram.com/brahim_mrz_store/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
               <FaInstagram className={`fill-orange-500 hover:fill-gray-400 h-6 w-6 ${twitch ? 'icon-twitch' : ''}`} />
             </Link>
-            <a href="mailto:meharzibr@gmail.com" aria-label="Email">
+            <Link href="mailto:meharzibr@gmail.com" aria-label="Email" target="_blank" rel="noopener noreferrer">
               <FaEnvelope className={`fill-blue-500 hover:fill-gray-400 h-6 w-6 ${twitch ? 'icon-twitch' : ''}`} />
-            </a>
-            <a href="tel:0791084298" aria-label="Phone">
+            </Link>
+            <Link href="tel:0791084298" aria-label="Phone" target="_blank" rel="noopener noreferrer">
               <FaPhone className={`fill-green-500 hover:fill-gray-400 h-6 w-6 ${twitch ? 'icon-twitch' : ''}`} />
-            </a>
+            </Link>
           </div>
         </div>
 

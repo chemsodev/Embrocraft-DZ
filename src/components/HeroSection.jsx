@@ -130,7 +130,7 @@ export default function HeroSection() {
         </div>
       )}
 
-      <div className="relative text-center md:text-left px-2 md:px-10 w-[100%] md:w-[70%] lg:w-[70%] mx-auto">
+      <div className="relative text-center md:text-left px-2 md:px-10 w-[100%] md:w-[70%]  mx-auto">
         <div className="bg-black/5 p-6 rounded-lg relative z-0 w-[100%] flex flex-col gap-4">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
             Embroidery DZ:
