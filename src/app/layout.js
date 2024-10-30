@@ -4,7 +4,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/Logo.png" type="image/jpeg" />
+        <link rel="icon" href="/images/Logo.png" type="image/png" /> 
+        <link rel="preload" href="/images/Logo.png" as="image" />
         <title>Embroidery DZ</title>
         <meta name="description" content="Discover your perfect custom embroidered clothing that reflects your unique style and personality. Create, design, and order one-of-a-kind pieces with ease!" />
         <meta property="og:url" content="https://embroidery-dz.vercel.app/" />
