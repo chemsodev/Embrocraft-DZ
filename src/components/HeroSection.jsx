@@ -54,7 +54,7 @@ export default function HeroSection() {
           width={3464}
           height={3464}
           className="rounded-full w-12 h-12 md:w-20 md:h-20 lg:w-24 lg:h-24"
-          priority // This will preload the logo image
+          priority 
         />
       </div>
 
@@ -121,7 +121,7 @@ export default function HeroSection() {
       )}
 
       <div className="relative text-center md:text-left px-2 md:px-10  w-[100%] md:w-[70%] lg:w-[50%] mx-auto">
-        <div className="bg-black/20 backdrop-blur-lg p-6 rounded-lg relative z-0 w-[100%] flex flex-col gap-4">
+        <div className="bg-black/5 p-6 rounded-lg relative z-0 w-[100%] flex flex-col gap-4">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
             Embroidery DZ:
             <br className="hidden md:block" /> Design Your Own
