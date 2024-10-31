@@ -32,7 +32,9 @@ export default function HeroSection() {
       video.src = "/videos/hero.mp4";
       video.onloadeddata = () => setIsLoading(false);
     } else {
-      setIsLoading(false); 
+      const img = new Image();
+      img.src = "/images/hero-bg.jpg";
+      img.onload = () => setIsLoading(false);
     }
   }, [isEmbeddedBrowser]);
 
@@ -92,7 +94,13 @@ export default function HeroSection() {
 
       {/* Conditional Open in Browser Button */}
       {isEmbeddedBrowser && (
-        <div className="absolute top-4 right-4 bg-white text-black px-4 py-2 rounded-md shadow-lg z-10">
+        <div
+          className={`${
+            isSmallScreen
+              ? "absolute top-4 left-1/2 transform -translate-x-1/2"
+              : "absolute top-4 right-4"
+          } bg-white text-black px-4 py-2 rounded-md shadow-lg z-10`}
+        >
           <p className="text-sm">For the best experience:</p>
           <a href="https://yourwebsite.com" className="underline font-bold">
             Open in Browser
