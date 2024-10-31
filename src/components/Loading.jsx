@@ -6,10 +6,23 @@ export default function Loading() {
   useEffect(() => {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
+    // Check for Instagram or Messenger in-app browsers
     if (/Instagram/.test(userAgent) || /FBAN|FBAV/.test(userAgent)) {
       setShowBrowserHint(true);
     }
   }, []);
+
+  const openInDefaultBrowser = () => {
+    const url = window.location.href;
+
+    // This will attempt to open in the device's default browser
+    const newWindow = window.open(url, "_blank");
+    if (newWindow) {
+      newWindow.opener = null; // Ensures it doesn’t redirect back to the app
+    } else {
+      alert("Please open this link in your default browser.");
+    }
+  };
 
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-100 z-50 space-y-6">
@@ -22,7 +35,7 @@ export default function Loading() {
           </p>
 
           <button
-            onClick={() => window.open(window.location.href, "_blank")}
+            onClick={openInDefaultBrowser}
             className="bg-[#F1C232] text-[#8C2F39] font-semibold py-2 px-6 rounded-md hover:bg-[#8C2F39] hover:text-white transition-transform duration-200"
           >
             Open in Browser
