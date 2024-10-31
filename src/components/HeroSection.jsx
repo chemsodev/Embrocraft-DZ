@@ -6,19 +6,20 @@ import Image from "next/image";
 import { FiMenu } from "react-icons/fi";
 
 export default function HeroSection() {
-  const handleContactClick = () => {
-    toggleMenu();
-    scrollToSection("#footer");
-  };
-
   const [isLoading, setIsLoading] = useState(true);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isEmbeddedBrowser, setIsEmbeddedBrowser] = useState(false);
 
   useEffect(() => {
     const checkScreenSize = () => {
       setIsSmallScreen(window.innerWidth < 1024);
     };
+    
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    setIsEmbeddedBrowser(
+      userAgent.includes("Instagram") || userAgent.includes("FBAN") || userAgent.includes("FBAV")
+    );
 
     checkScreenSize();
     window.addEventListener("resize", checkScreenSize);
@@ -26,11 +27,14 @@ export default function HeroSection() {
   }, []);
 
   useEffect(() => {
-    const video = document.createElement("video");
-    video.src = "/videos/hero.mp4";
-
-    video.onloadeddata = () => setIsLoading(false);
-  }, []);
+    if (!isEmbeddedBrowser) {
+      const video = document.createElement("video");
+      video.src = "/videos/hero.mp4";
+      video.onloadeddata = () => setIsLoading(false);
+    } else {
+      setIsLoading(false); 
+    }
+  }, [isEmbeddedBrowser]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -44,19 +48,34 @@ export default function HeroSection() {
     }
   };
 
+  const handleContactClick = () => {
+    toggleMenu();
+    scrollToSection("#footer");
+  };
+
   if (isLoading) return <Loading />;
 
   return (
     <div className="relative h-[80vh] lg:h-screen flex items-center justify-center text-gray-100 overflow-hidden">
       
-      <video
-        className="absolute inset-0 w-full h-full object-cover"
-        src="/videos/hero.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+      {!isEmbeddedBrowser ? (
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/videos/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      ) : (
+        <Image
+          src="/images/hero-bg.jpg" 
+          alt="Hero Background"
+          layout="fill"
+          objectFit="cover"
+          className="absolute inset-0"
+        />
+      )}
 
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
@@ -71,6 +90,17 @@ export default function HeroSection() {
         />
       </div>
 
+      {/* Conditional Open in Browser Button */}
+      {isEmbeddedBrowser && (
+        <div className="absolute top-4 right-4 bg-white text-black px-4 py-2 rounded-md shadow-lg z-10">
+          <p className="text-sm">For the best experience:</p>
+          <a href="https://yourwebsite.com" className="underline font-bold">
+            Open in Browser
+          </a>
+        </div>
+      )}
+
+      {/* Navigation Bar */}
       {isSmallScreen ? (
         <button
           onClick={toggleMenu}
@@ -105,6 +135,7 @@ export default function HeroSection() {
         </div>
       )}
 
+      {/* Mobile Menu */}
       {isSmallScreen && isMenuOpen && (
         <div className="absolute top-14 right-1 bg-black/20 backdrop-blur-lg p-4 rounded-lg z-10">
           <nav className="flex flex-col space-y-4 text-lg font-semibold text-gray-200">
@@ -130,6 +161,7 @@ export default function HeroSection() {
         </div>
       )}
 
+      {/* Hero Section Content */}
       <div className="relative text-center md:text-left px-2 md:px-10 w-[100%] md:w-[70%]  mx-auto">
         <div className="bg-black/5 p-6 rounded-lg relative z-0 w-[100%] flex flex-col gap-4">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
