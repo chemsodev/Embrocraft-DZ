@@ -20,7 +20,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-gray-100 text-black py-8">
+        <footer className="bg-transparent text-black py-8">
             <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <div className="flex items-center flex-col space-x-2">
                     <Image
