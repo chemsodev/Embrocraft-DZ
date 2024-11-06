@@ -57,7 +57,7 @@ export default function Header() {
         </nav>
       )}
       {isSmallScreen && isMenuOpen && (
-        <div className="absolute top-14 right-4 bg-black/20 p-4 rounded-lg z-10">
+        <div className="absolute top-12 left-4 bg-black/20 p-4 rounded-lg z-10">
           <nav className="flex flex-col space-y-4 text-lg font-semibold text-gray-200">
             <Link href="/" onClick={toggleMenu} className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4">
               الرئيسية
