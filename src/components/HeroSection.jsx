@@ -1,20 +1,7 @@
-// components/HeroSection.js
 "use client";
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import Loading from "../components/Loading";
 
 export default function HeroSection() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const video = document.createElement("video");
-    video.src = "/videos/hero.mp4";
-    video.onloadeddata = () => setIsLoading(false);
-  }, []);
-
-  if (isLoading) return <Loading />;
-
   return (
     <div className="relative h-[80vh] lg:h-screen flex items-center justify-center text-gray-100 overflow-hidden">
       <video
@@ -25,7 +12,6 @@ export default function HeroSection() {
         muted
         playsInline
       />
-      {/* Updated overlay with a lighter opacity */}
       <div className="absolute inset-0 bg-black opacity-30"></div>
       <div className="relative text-center md:text-right px-4 sm:px-6 md:px-10 w-full md:w-[70%] mx-auto">
         <div className="bg-black/20 p-4 sm:p-6 rounded-lg relative z-0 w-full flex flex-col gap-4">
@@ -51,7 +37,7 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-6 w-full flex justify-center hidden lg:flex">
+      <div className="absolute bottom-6 w-full justify-center hidden lg:flex">
         <span className="animate-bounce text-white text-3xl">↓</span>
       </div>
     </div>
