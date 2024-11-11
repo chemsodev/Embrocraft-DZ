@@ -17,23 +17,23 @@ export default function StepsToOrder() {
 
   const steps = [
     {
-      title: "Choose Your Style",
-      description: "Select your preferred clothing item and style to get started.",
+      title: "اختر أسلوبك",
+      description: "اختر القطعة وأسلوب الملابس المفضل لبدء التصميم.",
     },
     {
-      title: "Customize Colors",
-      description: "Personalize your design with various colors and elements.",
+      title: "تخصيص الألوان",
+      description: "خصص التصميم بالألوان والعناصر المختلفة.",
     },
     {
-      title: "Place Your Order",
-      description: "Complete your order and look forward to your unique piece!",
+      title: "أكمل طلبك",
+      description: "أكمل عملية الطلب واستعد لاستقبال القطعة المميزة!",
     },
   ];
 
   return (
     <div className="py-16 bg-gray-100" id="steps">
       <h2 className="text-4xl font-bold text-center mb-10">
-        How to Order Custom Embroidered Clothes?
+        كيف تطلب ملابس مطرزة حسب الطلب؟
       </h2>
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
         {steps.map((step, index) => (

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import HeroSection from "../components/HeroSection";
-import ClothingStyles from "../components/ClothingStyles";
+import ClothingStyles from "../components/ClothingCategories";
 import StepsToOrder from "../components/StepsToOrder";
 import ComingSoon from "../components/ComingSoon";
 

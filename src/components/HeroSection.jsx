@@ -25,30 +25,33 @@ export default function HeroSection() {
         muted
         playsInline
       />
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-      {/* Main content */}
-      <div className="relative text-center md:text-right px-2 md:px-10 w-[100%] md:w-[70%] mx-auto">
-        <div className="bg-black/5 p-6 rounded-lg relative z-0 w-[100%] flex flex-col gap-4">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-            تطريز DZ: <br className="hidden md:block" /> صمم ملابسك الخاصة
+      {/* Updated overlay with a lighter opacity */}
+      <div className="absolute inset-0 bg-black opacity-30"></div>
+      <div className="relative text-center md:text-right px-4 sm:px-6 md:px-10 w-full md:w-[70%] mx-auto">
+        <div className="bg-black/20 p-4 sm:p-6 rounded-lg relative z-0 w-full flex flex-col gap-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            Embrocraft DZ: <br className="hidden md:block" /> صمم ملابسك الخاصة
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed">
             ارتقِ بأسلوبك مع ملابسنا المطرزة حسب الطلب! أطلق إبداعك وصمم قطعة فريدة من نوعها.
           </p>
           <div className="flex flex-col sm:flex-row sm:justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4 gap-4">
-            <Link href="/design" className="bg-[#8C2F39] text-gray-100 font-semibold py-3 px-6 sm:py-4 sm:px-8 text-lg sm:text-xl rounded-md">
+            <Link
+              href="/design"
+              className="bg-[#8C2F39] text-gray-100 font-semibold py-3 px-6 sm:py-4 sm:px-8 text-base sm:text-lg rounded-md transition-all duration-300 ease-in-out transform hover:bg-[#9c3a44] hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#9c3a44]"
+            >
               ابدأ التصميم
             </Link>
             <button
               onClick={() => document.querySelector("#clothing-styles")?.scrollIntoView({ behavior: "smooth" })}
-              className="bg-[#F1C232] border-2 border-[#8C2F39] text-[#8C2F39] font-semibold py-3 px-6 sm:py-4 sm:px-8 text-lg sm:text-xl rounded-md"
+              className="bg-[#F1C232] border-2 border-[#8C2F39] text-[#8C2F39] font-semibold py-3 px-6 sm:py-4 sm:px-8 text-base sm:text-lg rounded-md transition-all duration-300 ease-in-out transform hover:bg-[#8C2F39] hover:text-gray-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#8C2F39]"
             >
               تصفح الأنماط
             </button>
           </div>
         </div>
       </div>
-      <div className="absolute bottom-6 w-full justify-center hidden lg:flex">
+      <div className="absolute bottom-6 w-full flex justify-center hidden lg:flex">
         <span className="animate-bounce text-white text-3xl">↓</span>
       </div>
     </div>

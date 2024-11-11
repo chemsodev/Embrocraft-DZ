@@ -25,7 +25,7 @@ export default function Header() {
   };
 
   return (
-    <header className="absolute top-2 inset-x-0 flex justify-between items-center px-4 lg:px-8 z-20">
+    <header className="absolute top-2 inset-x-0 flex justify-between items-center px-4 lg:px-8 z-20 bg-transparent">
       <div className="flex items-center space-x-2">
         <Image
           src="/images/Logo.jpg"
@@ -41,7 +41,7 @@ export default function Header() {
           <FiMenu size={24} />
         </button>
       ) : (
-        <nav className="flex space-x-8 text-lg font-semibold text-gray-200">
+        <nav className="flex space-x-8 text-lg font-semibold text-gray-200 ">
           <Link href="/" className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4">
             الرئيسية
           </Link>

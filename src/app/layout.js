@@ -16,14 +16,14 @@ export default function RootLayout({ children }) {
         />
         <meta property="og:url" content="https://embrocraft-dz.vercel.app/" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="تطريز DZ" />
+        <meta property="og:title" content="Embrocraft DZ" />
         <meta
           property="og:description"
           content="اكتشف الملابس المطرزة المخصصة التي تعكس أسلوبك وشخصيتك الفريدة. أنشئ وصمم واطلب قطعًا فريدة من نوعها بسهولة!"
         />
         <meta property="og:image" content="https://embrocraft-dz.vercel.app/images/Logo.jpg" />
       </head>
-      <body>
+      <body className="bg-gray-100">
         <Header />
         {children}
         <Footer />
