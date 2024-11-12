@@ -1,12 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation"; // Use usePathname instead of useRouter
+import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
 
 export default function Header() {
-  const pathname = usePathname(); // Get current path
+  const pathname = usePathname();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -25,14 +25,10 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
-  // Log the current path to verify it
-  console.log("Current path:", pathname);
-
-  // Set text color based on the current path
   const textColor = pathname === "/design" ? "text-black" : "text-gray-200";
 
   return (
-    <header className="absolute top-2 inset-x-0 flex justify-between items-center px-4 lg:px-8 z-20 bg-transparent">
+    <header className="fixed top-0 inset-x-0 flex justify-between items-center px-4 lg:px-8 z-20 bg-transparent">
       <div className="flex items-center space-x-2">
         <Image
           src="/images/Logo.jpg"
@@ -45,39 +41,39 @@ export default function Header() {
       </div>
       {isSmallScreen ? (
         <button onClick={toggleMenu} className={`p-2 bg-black/20 rounded-lg ${textColor}`}>
-          <FiMenu size={24} />
+          {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
       ) : (
-        <nav className="flex space-x-8 text-lg font-semibold">
-          <Link href="/" className={`hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 ${textColor}`}>
+        <nav className={`flex space-x-8 text-lg font-semibold ${textColor}`}>
+          <Link href="/" className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4">
             الرئيسية
           </Link>
-          <Link href="/design" className={`hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 ${textColor}`}>
+          <Link href="/design" className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4">
             التصميم
           </Link>
-          <button onClick={() => scrollToSection("#clothing-styles")} className={`hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 ${textColor}`}>
+          <Link href="#" onClick={() => scrollToSection("#clothing-styles")} className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4">
             الأنماط
-          </button>
-          <button onClick={() => scrollToSection("#footer")} className={`hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 ${textColor}`}>
+          </Link>
+          <Link href="#" onClick={() => scrollToSection("#footer")} className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4">
             اتصل بنا
-          </button>
+          </Link>
         </nav>
       )}
       {isSmallScreen && isMenuOpen && (
-        <div className="absolute top-12 left-4 bg-black/20 p-4 rounded-lg z-10">
-          <nav className="flex flex-col space-y-4 text-lg font-semibold">
-            <Link href="/" onClick={toggleMenu} className={`hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 ${textColor}`}>
+        <div className="fixed top-0 right-0 h-full w-3/4 bg-black/90 z-30 p-6 flex flex-col space-y-6 text-lg text-gray-100 font-semibold shadow-lg">
+          <nav className="flex flex-col space-y-4 items-center">
+            <Link href="/" onClick={toggleMenu} className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 text-center">
               الرئيسية
             </Link>
-            <Link href="/design" onClick={toggleMenu} className={`hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 ${textColor}`}>
+            <Link href="/design" onClick={toggleMenu} className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 text-center">
               التصميم
             </Link>
-            <button onClick={() => scrollToSection("#clothing-styles")} className={`hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 ${textColor}`}>
+            <Link href="#" onClick={() => scrollToSection("#clothing-styles")} className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 text-center">
               الأنماط
-            </button>
-            <button onClick={() => scrollToSection("#footer")} className={`hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 ${textColor}`}>
+            </Link>
+            <Link href="#" onClick={() => scrollToSection("#footer")} className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4 text-center">
               اتصل بنا
-            </button>
+            </Link>
           </nav>
         </div>
       )}

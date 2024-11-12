@@ -38,7 +38,7 @@ export default function Footer() {
                     <Link href="/design" className="hover:text-[#8C2F39]">التصميم</Link>
                     <Link href="#clothing-styles" className="hover:text-[#8C2F39]" onClick={() => scrollToSection("#clothing-styles")}>الأنماط</Link>
                     <Link href="#footer" className="hover:text-[#8C2F39]" onClick={handleContactClick}>
-                        تواصل
+                    اتصل بنا
                     </Link>
                 </nav>
 

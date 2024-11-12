@@ -14,3 +14,6 @@
     animation-iteration-count: 3;
   }
   
+  html {
+  scroll-behavior: smooth;
+}
