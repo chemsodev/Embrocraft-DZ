@@ -37,17 +37,17 @@ export default function RootLayout({ children }) {
   <link rel="icon" href="/images/Logo.jpg" type="image/jpeg" />
   <title>Embrocraft DZ</title>
   <meta name="description" content="اكتشف الملابس المطرزة المخصصة التي تعكس أسلوبك وشخصيتك الفريدة. أنشئ وصمّم واطلب قطعًا فريدة بسهولة!" />
-  <meta property="og:url" content="https://embroidery-dz.vercel.app/" />
+  <meta property="og:url" content="https://embrocraft-dz.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Embrocraft DZ" />
   <meta property="og:description" content="اكتشف الملابس المطرزة المخصصة التي تعكس أسلوبك وشخصيتك الفريدة. أنشئ وصمّم واطلب قطعًا فريدة بسهولة!" />
-  <meta property="og:image" content="https://embroidery-dz.vercel.app/images/Logo.jpg" />
+  <meta property="og:image" content="https://embrocraft-dz.vercel.app/images/Logo.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta property="twitter:domain" content="embroidery-dz.vercel.app" />
-  <meta property="twitter:url" content="https://embroidery-dz.vercel.app/" />
+  <meta property="twitter:domain" content="embrocraft-dz.vercel.app" />
+  <meta property="twitter:url" content="https://embrocraft-dz.vercel.app/" />
   <meta name="twitter:title" content="Embrocraft DZ" />
   <meta name="twitter:description" content="اكتشف الملابس المطرزة المخصصة التي تعكس أسلوبك وشخصيتك الفريدة. أنشئ وصمّم واطلب قطعًا فريدة بسهولة!" />
-  <meta name="twitter:image" content="https://embroidery-dz.vercel.app/images/Logo.jpg" />
+  <meta name="twitter:image" content="https://embrocraft-dz.vercel.app/images/Logo.jpg" />
 </head>
 
         <body className="bg-gray-100">
