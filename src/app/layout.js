@@ -9,7 +9,6 @@ export default function RootLayout({ children }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Load video and images in parallel for efficient loading
     const videoPromise = new Promise((resolve) => {
       const video = document.createElement("video");
       video.src = "/videos/hero.mp4";
