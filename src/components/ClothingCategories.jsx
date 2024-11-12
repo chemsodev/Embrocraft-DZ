@@ -27,7 +27,7 @@ export default function ClothingCategories() {
   return (
     <div className="py-16  text-center bg-transparent" id="clothing-categories">
       <h2 className="text-4xl font-bold mb-12">تصفح تصنيفات الملابس</h2>
-      <div className="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:space-x-6 px-4">
+      <div className="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0  md:gap-6 px-4">
         {clothingCategories.map((category, index) => (
           <Card
             key={index}

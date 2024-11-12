@@ -3,9 +3,12 @@ import { useState } from 'react';
 import { FaInstagram, FaEnvelope, FaPhone, FaWhatsapp } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function Footer() {
     const [twitch, setTwitch] = useState(false);
+    const router = useRouter();
+    const pathname = usePathname();
 
     const handleContactClick = () => {
         setTwitch(true);
@@ -15,7 +18,18 @@ export default function Footer() {
     const scrollToSection = (sectionId) => {
         const section = document.querySelector(sectionId);
         if (section) {
-         section.scrollIntoView({ behavior: "smooth" });
+            section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
+    const handleNavigateAndScroll = (sectionId) => {
+        if (pathname === "/") {
+            scrollToSection(sectionId);
+        } else {
+            router.push("/");
+            setTimeout(() => {
+                scrollToSection(sectionId);
+            }, 800); 
         }
     };
 
@@ -36,14 +50,16 @@ export default function Footer() {
                 <nav className="flex gap-4 text-md font-semibold">
                     <Link href="/" className="hover:text-[#8C2F39]">الرئيسية</Link>
                     <Link href="/design" className="hover:text-[#8C2F39]">التصميم</Link>
-                    <Link href="#clothing-styles" className="hover:text-[#8C2F39]" onClick={() => scrollToSection("#clothing-styles")}>الأنماط</Link>
+                    <button onClick={() => handleNavigateAndScroll("#clothing-categories")} className="hover:text-[#8C2F39]">
+                        الأنماط
+                    </button>
                     <Link href="#footer" className="hover:text-[#8C2F39]" onClick={handleContactClick}>
-                    اتصل بنا
+                        اتصل بنا
                     </Link>
                 </nav>
 
                 <div className="flex gap-4 items-center" id="footer">
-                    <Link href="https://www.instagram.com/brahim_mrz_store/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                <Link href="https://www.instagram.com/brahim_mrz_store/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                         <FaInstagram className={`fill-orange-500 hover:fill-gray-400 h-6 w-6 ${twitch ? 'icon-twitch' : ''}`} />
                     </Link>
                     <Link href="mailto:meharzibr@gmail.com" aria-label="Email" target="_blank" rel="noopener noreferrer">
