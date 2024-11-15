@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-
 export async function GET(request) {
   const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } = process.env;
   const urlParams = new URL(request.url).searchParams;
