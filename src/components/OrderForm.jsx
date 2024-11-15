@@ -29,8 +29,7 @@ function OrderForm({ selectedImage }) {
 العنوان: ${formData.address}
 لون القميص: ${formData.shirtColor}
 معاينة التصميم: ${selectedImage.secure_url}`;
-        const whatsappUrl = `https://wa.me/0791084298(?text=${encodeURIComponent(message)}`;
-
+        const whatsappUrl = `https://wa.me/+213791084298?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
         
         setFormData({
