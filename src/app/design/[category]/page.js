@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { usePathname } from 'next/navigation'; // To get the dynamic category
 import Image from "next/image";
 import Loading from "@/components/Loading";
+import OrderForm from "@/components/OrderForm";
 
 export default function CategoryPage() {
   const pathname = usePathname();
@@ -10,14 +11,13 @@ export default function CategoryPage() {
 
   const [images, setImages] = useState([]); // State for all images fetched
   const [displayImages, setDisplayImages] = useState([]); // State for images to be displayed
+  const [selectedImage, setSelectedImage] = useState(null); // State for selected image
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [nextCursor, setNextCursor] = useState(null); // Cursor for pagination
   const [firstLoadComplete, setFirstLoadComplete] = useState(false); // Track the first load
   const [error, setError] = useState(null); // State for error handling
-  const customLoader = ({ src }) => {
-    return src;
-};
+  const customLoader = ({ src }) => src;
 
   const fetchImages = useCallback(async () => {
     if (loading || !hasMore) return; // Prevent duplicate fetches or unnecessary fetching
@@ -69,37 +69,50 @@ export default function CategoryPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll, fetchImages]);
 
+  const handleImageClick = (image) => {
+    setSelectedImage(image); // Set the clicked image as the selected one
+  };
+
   return (
     <div className="p-4 pt-16 md:pt-24">
-      <h1 className="text-2xl font-bold mb-6 text-center">{category} </h1>
-      {error && <p className="text-center text-red-500">{error}</p>} {/* Display error message */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {displayImages.length > 0 ? (
-          displayImages.map((image, index) => (
-            <div key={`${image.public_id}-${index}`} className="relative overflow-hidden rounded-lg shadow-lg bg-white">
-              <Image
-                className="object-cover w-full h-full transition-transform duration-300 transform hover:scale-125 image-fade-in"
-                loader={customLoader}
-                unoptimized
-                src={image.secure_url ? image.secure_url : "/images/t-shirtcat.png"}
-                alt={`${category} ${image.public_id}`}
-                width={300}
-                height={ 300}
-                loading="lazy"
-                placeholder="blur" // Use blur placeholder for smoother loading
-                blurDataURL="/images/t-shirtcat.png" // Placeholder image while loading
-                onLoadingComplete={(img) => {
-                  img.target.style.filter = "blur(0)"; // Remove blur effect once loaded
-                }}
-              />
-            </div>
-          ))
-        ) : (
-          <div className="col-span-full text-center text-xl text-gray-600 min-h-screen flex justify-center items-center">لا يتوفر منتجات</div>
-        )}
-      </div>
-      {loading && <Loading className="z-1"/>} {/* Show loading spinner */}
-      {!hasMore && !loading && <p className="text-center mt-6 text-xl text-gray-600">لا مزيد من المنتجات</p>}
+      {!selectedImage ? (
+        <>
+          <h1 className="text-2xl font-bold mb-6 text-center">{category}</h1>
+          {error && <p className="text-center text-red-500">{error}</p>} {/* Display error message */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            {displayImages.length > 0 ? (
+              displayImages.map((image, index) => (
+                <div
+                  key={`${image.public_id}-${index}`}
+                  className="relative overflow-hidden rounded-lg shadow-lg bg-white cursor-pointer"
+                  onClick={() => handleImageClick(image)}
+                >
+                  <Image
+                    className="object-cover w-full h-full transition-transform duration-300 transform hover:scale-125 image-fade-in"
+                    loader={customLoader}
+                    unoptimized
+                    src={image.secure_url ? image.secure_url : "/images/t-shirtcat.png"}
+                    alt={`${category} ${image.public_id}`}
+                    width={300}
+                    height={300}
+                    loading="lazy"
+                    placeholder="blur" // Use blur placeholder for smoother loading
+                    blurDataURL="/images/t-shirtcat.png" // Placeholder image while loading
+                  />
+                </div>
+              ))
+            ) : (
+              !loading && <div className="col-span-full text-center text-xl text-gray-600 min-h-screen flex justify-center items-center">لا يتوفر منتجات</div>
+            )}
+          </div>
+          {loading && <Loading className="z-1" />} {/* Show loading spinner */}
+          {!hasMore && !loading && <p className="text-center mt-6 text-xl text-gray-600">لا مزيد من المنتجات</p>}
+        </>
+      ) : (
+        <div className="flex flex-col items-center">
+          <OrderForm selectedImage={selectedImage} />
+        </div>
+      )}
     </div>
   );
 }
