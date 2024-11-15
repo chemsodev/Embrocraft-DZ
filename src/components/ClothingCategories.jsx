@@ -1,8 +1,8 @@
 import React from 'react';
 import Card from './ClothingCategoriesCard';
 
-
 export default function ClothingCategories() {
+  // Define your clothing categories as an array of objects
   const clothingCategories = [
     {
       title: "تيشيرتات",
@@ -25,9 +25,9 @@ export default function ClothingCategories() {
   ];
 
   return (
-    <div className="py-16  text-center bg-transparent" id="clothing-categories">
+    <div className="py-16 text-center bg-transparent" id="clothing-categories">
       <h2 className="text-4xl font-bold mb-12">تصفح تصنيفات الملابس</h2>
-      <div className="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0  md:gap-6 px-4">
+      <div className="flex flex-col md:flex-row justify-center space-y-6 md:space-y-0 md:gap-6 px-4">
         {clothingCategories.map((category, index) => (
           <Card
             key={index}
