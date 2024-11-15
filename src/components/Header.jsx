@@ -40,14 +40,14 @@ export default function Header() {
     }
   };
 
-  const textColor = "text-black";
+  const textColor = "text-white";
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
-    <header className="fixed top-0 inset-x-0 flex justify-between items-center px-4 lg:px-8 z-20 bg-transparent">
+    <header className="fixed bg-black/20 inset-x-0 flex justify-between items-center px-4 lg:px-8 z-50 ">
       <div className="flex items-center space-x-2">
         <Image
           src="/images/Logo.jpg"
@@ -63,7 +63,7 @@ export default function Header() {
           {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
       ) : ( 
-        <nav className={`flex space-x-8 text-lg font-semibold ${textColor}`}>
+        <nav className={`flex space-x-8 text-lg font-semibold ${textColor} `}>
           <Link href="/" className="hover:bg-[#F1C232] transition-colors rounded-md py-2 px-4">
             الرئيسية
           </Link>

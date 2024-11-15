@@ -70,15 +70,15 @@ export default function CategoryPage() {
   }, [handleScroll, fetchImages]);
 
   return (
-    <div className="p-4 pt-20">
-      <h1 className="text-2xl font-bold mb-6 text-center">{category} Gallery</h1>
+    <div className="p-4 pt-16 md:pt-24">
+      <h1 className="text-2xl font-bold mb-6 text-center">{category} </h1>
       {error && <p className="text-center text-red-500">{error}</p>} {/* Display error message */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {displayImages.length > 0 ? (
           displayImages.map((image, index) => (
             <div key={`${image.public_id}-${index}`} className="relative overflow-hidden rounded-lg shadow-lg bg-white">
               <Image
-                className="object-cover w-full h-full transition-transform duration-300 transform hover:scale-105 image-fade-in"
+                className="object-cover w-full h-full transition-transform duration-300 transform hover:scale-125 image-fade-in"
                 loader={customLoader}
                 unoptimized
                 src={image.secure_url ? image.secure_url : "/images/t-shirtcat.png"}
@@ -95,11 +95,11 @@ export default function CategoryPage() {
             </div>
           ))
         ) : (
-          <div className="col-span-full text-center text-xl text-gray-600">No images available</div>
+          <div className="col-span-full text-center text-xl text-gray-600 min-h-screen flex justify-center items-center">لا يتوفر منتجات</div>
         )}
       </div>
-      {loading && <Loading />} {/* Show loading spinner */}
-      {!hasMore && !loading && <p className="text-center mt-6 text-xl text-gray-600">No more images to load</p>}
+      {loading && <Loading className="z-1"/>} {/* Show loading spinner */}
+      {!hasMore && !loading && <p className="text-center mt-6 text-xl text-gray-600">لا مزيد من المنتجات</p>}
     </div>
   );
 }
