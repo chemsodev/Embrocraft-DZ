@@ -40,7 +40,7 @@ export default function Header() {
     }
   };
 
-  const textColor = pathname === "/design" ? "text-black" : "text-gray-200";
+  const textColor = "text-black";
 
   useEffect(() => {
     window.scrollTo(0, 0);
