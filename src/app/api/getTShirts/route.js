@@ -13,7 +13,7 @@ export async function GET(request) {
   try {
     let url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/image/upload?max_results=${limit}`;
 
-    // Only add next_cursor if it's valid (not null or undefined)
+    // add next_cursor if it's valid (not null or undefined)
     if (nextCursor && nextCursor !== "null") {
       url += `&next_cursor=${nextCursor}`;
     }
