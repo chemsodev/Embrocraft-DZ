@@ -10,11 +10,12 @@ function OrderForm({ selectedImage }) {
         address: '',
         shirtColor: '',
     });
+    const [showAlert, setShowAlert] = useState(false);
 
     const customLoader = ({ src }) => src;
     const pathname = usePathname();
     const category = pathname.split('/').pop(); // Extract category from the path
-    const place=document.getElementById("alert");
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -31,7 +32,7 @@ function OrderForm({ selectedImage }) {
 معاينة التصميم: ${selectedImage.secure_url}`;
         const whatsappUrl = `https://wa.me/+213540207506?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
-        
+
         setFormData({
             fullName: '',
             phoneNumber: '',
@@ -39,7 +40,7 @@ function OrderForm({ selectedImage }) {
             address: '',
             shirtColor: '',
         });
-        place.classList.remove("hidden");
+        setShowAlert(true);
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
@@ -47,8 +48,13 @@ function OrderForm({ selectedImage }) {
     };
 
     return (
-        <div className="flex flex-col items-center bg-gray-50 min-h-screen py-10">
-            <label htmlFor="alert" className="hidden bg-green-400 text-white py-2 px-4 rounded-lg absolute top-4 left-1/2 transform -translate-x-1/2 z-50" id="alert">تم تقديم طلبك بنجاح!</label>
+        <div className="flex flex-col items-center bg-gray-50 min-h-screen py-10 ">
+            {showAlert && (
+                <div className="bg-green-400 text-white py-2 px-6 rounded-lg fixed top-4 left-1/2 transform -translate-x-1/2 z-50 flex justify-between items-center">
+                    <span>تم تقديم طلبك بنجاح!</span>
+                    <button onClick={() => setShowAlert(false)} className=" text-lg font-bold mr-6">&times;</button>
+                </div>
+            )}
             <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl">
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">طلب حياكة مخصصة</h2>
                 {/* Preview Image Section */}
@@ -136,21 +142,22 @@ function OrderForm({ selectedImage }) {
                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             required
                         >
-                            <option value="">اختر اللون</option>
-                            <option value="white">أبيض</option>
-                            <option value="black">أسود</option>
-                            <option value="blue">أزرق</option>
-                            <option value="red">أحمر</option>
+                            <option value="">اختر لون القميص</option>
+                            <option value="أبيض">أبيض</option>
+                            <option value="أسود">أسود</option>
+                            <option value="أحمر">أحمر</option>
+                            <option value="أزرق">أزرق</option>
+                            <option value="أخضر">أخضر</option>
+                            <option value="أصفر">أصفر</option>
                         </select>
                     </div>
 
-                    {/* Submit Button */}
-                    <div className="flex justify-center">
+                    <div className="text-center">
                         <button
                             type="submit"
-                            className="px-6 py-2 text-white bg-indigo-600 rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            تقديم الطلب
+                            إرسال الطلب عبر واتساب
                         </button>
                     </div>
                 </form>
