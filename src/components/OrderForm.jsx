@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+"use client"
+import React, { useState ,useEffect} from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
@@ -15,7 +16,14 @@ function OrderForm({ selectedImage }) {
     const customLoader = ({ src }) => src;
     const pathname = usePathname();
     const category = pathname.split('/').pop(); // Extract category from the path
-
+    useEffect(() => {
+        if (selectedImage) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+    }, [selectedImage]);
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -62,7 +70,7 @@ function OrderForm({ selectedImage }) {
                     <h3 className="text-xl font-semibold mb-4 text-center text-gray-700">معاينة التصميم المحدد</h3>
                     <div className="w-full max-w-lg mx-auto">
                         <Image
-                            className="object-cover w-60 h-auto rounded-md border border-gray-200"
+                            className="object-cover w-60 h-auto rounded-sm px-3 border border-gray-200"
                             loader={customLoader}
                             unoptimized
                             src={selectedImage.secure_url}
@@ -85,7 +93,7 @@ function OrderForm({ selectedImage }) {
                             placeholder="الاسم الكامل"
                             value={formData.fullName}
                             onChange={handleChange}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-sm px-3 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             required
                         />
                     </div>
@@ -99,7 +107,7 @@ function OrderForm({ selectedImage }) {
                             placeholder="0555555555"
                             value={formData.phoneNumber}
                             onChange={handleChange}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-sm px-3 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             required
                         />
                     </div>
@@ -113,7 +121,7 @@ function OrderForm({ selectedImage }) {
                             placeholder="example@domain.com"
                             value={formData.email}
                             onChange={handleChange}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-sm px-3 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             required
                         />
                     </div>
@@ -127,7 +135,7 @@ function OrderForm({ selectedImage }) {
                             placeholder="العنوان الكامل"
                             value={formData.address}
                             onChange={handleChange}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-sm px-3 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             required
                         />
                     </div>
@@ -139,7 +147,7 @@ function OrderForm({ selectedImage }) {
                             name="shirtColor"
                             value={formData.shirtColor}
                             onChange={handleChange}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-sm px-3 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             required
                         >
                             <option value="">اختر لون القميص</option>
@@ -155,7 +163,7 @@ function OrderForm({ selectedImage }) {
                     <div className="text-center">
                         <button
                             type="submit"
-                            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-sm px-3 text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             إرسال الطلب عبر واتساب
                         </button>

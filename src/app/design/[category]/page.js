@@ -71,10 +71,7 @@ export default function CategoryPage() {
 
   const handleImageClick = (image) => {
     setSelectedImage(image); // Set the clicked image as the selected one
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-  });
+
   };
 
   return (
