@@ -17,6 +17,8 @@ export default function CategoryPage() {
   const [nextCursor, setNextCursor] = useState(null);
   const [firstLoadComplete, setFirstLoadComplete] = useState(false);
   const [error, setError] = useState(null);
+  const [initialFetchEmpty, setInitialFetchEmpty] = useState(false); // New state to track initial fetch
+
   const customLoader = ({ src }) => src;
 
   const fetchImages = useCallback(async () => {
@@ -28,6 +30,7 @@ export default function CategoryPage() {
       const res = await fetch(`/api/getImagesByCategory/${category}?next_cursor=${nextCursor || ''}`);
       if (res.ok) {
         const data = await res.json();
+        
         if (data.images && data.images.length > 0) {
           const displayedImageIds = new Set(displayImages.map(image => image.public_id));
           const newImages = data.images.filter(newImage => !displayedImageIds.has(newImage.public_id));
@@ -41,6 +44,9 @@ export default function CategoryPage() {
           setHasMore(!!data.next_cursor);
           setFirstLoadComplete(true);
         } else {
+          if (!firstLoadComplete) {
+            setInitialFetchEmpty(true); // Set to true if initial fetch is empty
+          }
           setHasMore(false);
         }
       } else {
@@ -52,7 +58,7 @@ export default function CategoryPage() {
     } finally {
       setLoading(false);
     }
-  }, [loading, hasMore, nextCursor, category, displayImages]);
+  }, [loading, hasMore, nextCursor, category, displayImages, firstLoadComplete]);
 
   const handleScroll = useCallback(() => {
     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100) {
@@ -83,34 +89,30 @@ export default function CategoryPage() {
               displayImages.map((image, index) => (
                 <div
                   key={`${image.public_id}-${index}`}
-                  className="relative overflow-hidden rounded-lg shadow-lg bg-white cursor-pointer"
-                  onClick={() => handleImageClick(image)}
+                  className="relative overflow-hidden rounded-lg shadow-lg bg-white cursor-pointer onClick={() => handleImageClick(image)}
                 >
                   <Image
-                    className="object-cover w-full h-full transition-transform duration-300 transform hover:scale-125 image-fade-in"
                     loader={customLoader}
-                    unoptimized
-                    src={image.secure_url ? image.secure_url : "/images/t-shirtcat.png"}
-                    alt={`${category} ${image.public_id}`}
+                    src={image.url}
+                    alt={image.alt || "Product Image"}
                     width={300}
                     height={300}
-                    loading="lazy"
-                    placeholder="blur"
-                    blurDataURL="/images/t-shirtcat.png"
+                    className="w-full h-auto object-cover"
                   />
                 </div>
               ))
+            ) : initialFetchEmpty ? (
+              <p className="text-center">لا يتوفر منتجات</p>
             ) : (
-              !loading && <div className="col-span-full text-xl text-gray-600 min-h-screen flex text-center justify-center items-center">لا يتوفر منتجات</div>
+              loading && <Loading />
             )}
           </div>
-          {loading && <Loading className="z-1" />}
-          {!hasMore && !loading && <p className="text-center mt-6 text-xl min-h-screen flex justify-center items-center text-gray-600">لا مزيد من المنتجات</p>}
+          {hasMore && !initialFetchEmpty && !loading && (
+            <p className="text-center">لا مزيد من المنتجات</p>
+          )}
         </>
       ) : (
-        <div className="flex flex-col items-center">
-          <OrderForm selectedImage={selectedImage} />
-        </div>
+        <OrderForm image={selectedImage} onClose={() => setSelectedImage(null)} />
       )}
     </div>
   );
