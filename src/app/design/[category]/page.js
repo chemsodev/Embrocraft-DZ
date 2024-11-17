@@ -17,7 +17,7 @@ export default function CategoryPage() {
   const [nextCursor, setNextCursor] = useState(null);
   const [firstLoadComplete, setFirstLoadComplete] = useState(false);
   const [error, setError] = useState(null);
-  const [initialFetchEmpty, setInitialFetchEmpty] = useState(false); // New state to track initial fetch
+  const [initialFetchEmpty, setInitialFetchEmpty] = useState(false);
 
   const customLoader = ({ src }) => src;
 
@@ -45,7 +45,7 @@ export default function CategoryPage() {
           setFirstLoadComplete(true);
         } else {
           if (!firstLoadComplete) {
-            setInitialFetchEmpty(true); // Set to true if initial fetch is empty
+            setInitialFetchEmpty(true);
           }
           setHasMore(false);
         }
@@ -89,7 +89,8 @@ export default function CategoryPage() {
               displayImages.map((image, index) => (
                 <div
                   key={`${image.public_id}-${index}`}
-                  className="relative overflow-hidden rounded-lg shadow-lg bg-white cursor-pointer onClick={() => handleImageClick(image)}
+                  className="relative overflow-hidden rounded-lg shadow-lg bg-white cursor-pointer"
+                  onClick={() => handleImageClick(image)}
                 >
                   <Image
                     loader={customLoader}
