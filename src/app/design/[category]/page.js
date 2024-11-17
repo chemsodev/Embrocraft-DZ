@@ -103,13 +103,13 @@ export default function CategoryPage() {
                 </div>
               ))
             ) : initialFetchEmpty ? (
-              <p className="text-center">لا يتوفر منتجات</p>
+              <p className="flex justify-center items-center text-center">لا يتوفر منتجات</p>
             ) : (
               loading && <Loading />
             )}
           </div>
           {hasMore && !initialFetchEmpty && !loading && (
-            <p className="text-center">لا مزيد من المنتجات</p>
+            <p className="text-center flex justify-center items-center">لا مزيد من المنتجات</p>
           )}
         </>
       ) : (
