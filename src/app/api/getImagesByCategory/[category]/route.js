@@ -16,8 +16,8 @@ export async function GET(request, { params }) {
 
   try {
     // Construct the URL to fetch images from the specified folder (category)
-    let url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/image/upload?max_results=${limit}&asset_folder=${category}`; // Filter by folder/category
-
+    let url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/image/upload?max_results=${limit}`;
+    
     // Only add next_cursor if it's valid (not null or undefined)
     if (nextCursor && nextCursor !== "null") {
       url += `&next_cursor=${nextCursor}`;
@@ -44,11 +44,13 @@ export async function GET(request, { params }) {
 
     const data = await response.json();
 
-    // Prepare the response
-    const resources = data.resources.map(item => ({
-      public_id: item.public_id,
-      secure_url: item.secure_url,
-    }));
+    // Filter resources to only include those in the specified category
+    const resources = data.resources
+      .filter(item => item.asset_folder === category) // Filter by asset_folder
+      .map(item => ({
+        public_id: item.public_id,
+        secure_url: item.secure_url,
+      }));
 
     return NextResponse.json({ images: resources, next_cursor: data.next_cursor || null });
   } catch (error) {
@@ -58,4 +60,5 @@ export async function GET(request, { params }) {
       console.error("An error occurred:", error);
     }
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
-  }}
+  }
+}
