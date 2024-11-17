@@ -30,7 +30,7 @@ export default function CategoryPage() {
       const res = await fetch(`/api/getImagesByCategory/${category}?next_cursor=${nextCursor || ''}`);
       if (res.ok) {
         const data = await res.json();
-        
+
         if (data.images && data.images.length > 0) {
           const displayedImageIds = new Set(displayImages.map(image => image.public_id));
           const newImages = data.images.filter(newImage => !displayedImageIds.has(newImage.public_id));
@@ -82,7 +82,7 @@ export default function CategoryPage() {
     <div className="p-4 pt-16 md:pt-24">
       {!selectedImage ? (
         <>
-          <h1 className="text-2xl font-bold mb-6 text-center">{category}</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">{category}</h1>
           {error && <p className="text-center text-red-500">{error}</p>}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 min-h-screen">
             {displayImages.length > 0 ? (
@@ -103,13 +103,13 @@ export default function CategoryPage() {
                 </div>
               ))
             ) : initialFetchEmpty ? (
-              <p className="flex justify-center items-center text-center">لا يتوفر منتجات</p>
+              <p className="flex justify-center items-center text-center text-xl">لا يتوفر منتجات</p>
             ) : (
               loading && <Loading />
             )}
           </div>
           {hasMore && !initialFetchEmpty && !loading && (
-            <p className="text-center flex justify-center items-center">لا مزيد من المنتجات</p>
+            <p class Name="text-center text-xl flex justify-center items-center">لا مزيد من المنتجات</p>
           )}
         </>
       ) : (
