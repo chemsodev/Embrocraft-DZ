@@ -52,17 +52,8 @@ export async function GET(request, { params }) {
     }
 
     const data = await response.json();
-     
-    // Prepare the response with filtered resources (filtered by category)
-    const resources = data.resources
-      .filter(item => item.asset_folder === category) // Filter by category (folder)
-      .map(item => ({
-        public_id: item.public_id,
-        secure_url: item.secure_url,
-      }));
-
     return NextResponse.json({
-      images: resources,
+      images: data.resources,
       next_cursor: data.next_cursor || null,
     });
   } catch (error) {
