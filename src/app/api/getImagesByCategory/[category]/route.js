@@ -3,6 +3,16 @@ import { NextResponse } from "next/server";
 export async function GET(request, { params }) {
   const { category } = params; // Access the category dynamically
 
+  const validCategories = ["t-shirts", "hoodies", "sweatshirts"]; // List of valid categories
+
+  // Check if the category is valid
+  if (!validCategories.includes(category)) {
+    return NextResponse.json(
+      { message: "Invalid category" },
+      { status: 400 } // Bad request
+    );
+  }
+
   const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } = process.env;
   const urlParams = new URL(request.url).searchParams;
   const nextCursor = urlParams.get("next_cursor");
@@ -16,8 +26,7 @@ export async function GET(request, { params }) {
 
   try {
     // Construct the URL to fetch images from the specified folder (category)
-    let url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/image/upload?max_results=${limit}`;
-    
+    let url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/search/?max_results=300&expression=folder:${category}`;
     // Only add next_cursor if it's valid (not null or undefined)
     if (nextCursor && nextCursor !== "null") {
       url += `&next_cursor=${nextCursor}`;
@@ -43,16 +52,19 @@ export async function GET(request, { params }) {
     }
 
     const data = await response.json();
-
-    // Filter resources to only include those in the specified category
+     
+    // Prepare the response with filtered resources (filtered by category)
     const resources = data.resources
-      .filter(item => item.asset_folder === category) // Filter by asset_folder
+      .filter(item => item.asset_folder === category) // Filter by category (folder)
       .map(item => ({
         public_id: item.public_id,
         secure_url: item.secure_url,
       }));
 
-    return NextResponse.json({ images: resources, next_cursor: data.next_cursor || null });
+    return NextResponse.json({
+      images: resources,
+      next_cursor: data.next_cursor || null,
+    });
   } catch (error) {
     if (error.name === "AbortError") {
       console.error("Fetch request timed out.");
