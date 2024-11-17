@@ -12,6 +12,7 @@ const ClothingCategoriesCard = ({ title, href, imageSrc, description }) => {
             fill
             objectFit="contain"
             className="transition-transform duration-200 ease-in-out transform hover:scale-110"
+            priority
           />
       </Link>
       <h3 className="text-2xl font-semibold my-4">{title}</h3>

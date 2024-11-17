@@ -23,19 +23,26 @@ export default function CategoryPage() {
     if (loading || !hasMore) return; // Prevent duplicate fetches or unnecessary fetching
     setLoading(true);
     setError(null); // Reset error state on new fetch
-
+  
     try {
       const res = await fetch(`/api/getImagesByCategory/${category}?next_cursor=${nextCursor}`);
       if (res.ok) {
         const data = await res.json();
         console.log("Fetched data:", data);
-
+  
         if (data.images && data.images.length > 0) {
-          setImages((prev) => [...prev, ...data.images]); // Append new images
-          setDisplayImages((prev) => [
-            ...prev,
-            ...data.images.slice(0, 10), // Show 10 more images at a time
-          ]);
+          // Create a Set of already displayed image public_ids
+          const displayedImageIds = new Set(displayImages.map(image => image.public_id));
+  
+          // Filter out images that are already displayed
+          const newImages = data.images.filter(newImage => !displayedImageIds.has(newImage.public_id));
+  
+          // Update the displayImages and images state
+          if (newImages.length > 0) {
+            setDisplayImages(prev => [...prev, ...newImages]); // Add only new images to display
+            setImages(prev => [...prev, ...newImages]); // Append new images to all images
+          }
+  
           setNextCursor(data.next_cursor); // Update next cursor
           setHasMore(!!data.next_cursor); // If there's no next cursor, stop fetching
           setFirstLoadComplete(true); // Mark the first load as complete
@@ -51,8 +58,7 @@ export default function CategoryPage() {
     } finally {
       setLoading(false); // Always reset loading state
     }
-  }, [loading, hasMore, nextCursor, category]);
-
+  }, [loading, hasMore, nextCursor, category, displayImages]);
   // Infinite scroll handler
   const handleScroll = useCallback(() => {
     if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100) {
@@ -71,7 +77,6 @@ export default function CategoryPage() {
 
   const handleImageClick = (image) => {
     setSelectedImage(image); // Set the clicked image as the selected one
-
   };
 
   return (
@@ -80,7 +85,7 @@ export default function CategoryPage() {
         <>
           <h1 className="text-2xl font-bold mb-6 text-center">{category}</h1>
           {error && <p className="text-center text-red-500">{error}</p>} {/* Display error message */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 min-h-screen">
             {displayImages.length > 0 ? (
               displayImages.map((image, index) => (
                 <div
@@ -103,11 +108,11 @@ export default function CategoryPage() {
                 </div>
               ))
             ) : (
-              !loading && <div className="col-span-full text-center text-xl text-gray-600 min-h-screen flex justify-center items-center">لا يتوفر منتجات</div>
+              !loading && <div className="col-span-full  text-xl text-gray-600 min-h-screen flex text-center justify-center items-center">لا يتوفر منتجات</div>
             )}
           </div>
           {loading && <Loading className="z-1" />} {/* Show loading spinner */}
-          {!hasMore && !loading && <p className="text-center mt-6 text-xl text-gray-600">لا مزيد من المنتجات</p>}
+          {!hasMore && !loading && <p className="text-center mt-6 text-xl min-h-screen flex justify-center items-center text-gray-600">لا مزيد من المنتجات</p>}
         </>
       ) : (
         <div className="flex flex-col items-center">

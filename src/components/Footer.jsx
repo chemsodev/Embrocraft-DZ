@@ -43,6 +43,7 @@ export default function Footer() {
                         width={3464}
                         height={3464}
                         className="rounded-full w-12 h-12 md:w-28 md:h-28 lg:w-32 lg:h-32"
+                        priority
                     />
                     <span className="text-lg font-bold">Embrocraft DZ</span>
                 </div>

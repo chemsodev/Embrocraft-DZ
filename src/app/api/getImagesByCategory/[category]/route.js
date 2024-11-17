@@ -1,9 +1,7 @@
-// app/api/getImagesByCategory/[category]/route.js
 import { NextResponse } from "next/server";
 
 export async function GET(request, { params }) {
-  // Await params to access the category dynamically
-  const { category } = params;
+  const { category } = params; // Access the category dynamically
 
   const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } = process.env;
   const urlParams = new URL(request.url).searchParams;
@@ -46,16 +44,13 @@ export async function GET(request, { params }) {
 
     const data = await response.json();
 
-    // Filter images based on asset_folder
-    const filteredImages = data.resources.filter(image => image.asset_folder === category);
-
-    // Map the filtered images to the desired format
-    const resources = filteredImages.map((item) => ({
+    // Prepare the response
+    const resources = data.resources.map(item => ({
       public_id: item.public_id,
       secure_url: item.secure_url,
     }));
 
-    return NextResponse.json({ images: resources, next_cursor: data.next_cursor });
+    return NextResponse.json({ images: resources, next_cursor: data.next_cursor || null });
   } catch (error) {
     if (error.name === "AbortError") {
       console.error("Fetch request timed out.");
@@ -63,5 +58,4 @@ export async function GET(request, { params }) {
       console.error("An error occurred:", error);
     }
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
-  }
-}
+  }}
