@@ -42,8 +42,8 @@ Follow these instructions to set up the project locally:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/custom-embroidery-clothing.git
-   cd custom-embroidery-clothing
+   git clone https://github.com/chemsodev/Embrocraft-DZ-Front.git
+   cd Embrocraft-DZ-Front
    ```
 2. **Install Dependencies**:
 ```bash
@@ -51,7 +51,7 @@ npm install
 ```
 3. **Run the Development Server**:
 ```bash
-npm run dev
+npm run dev --turbo
 ```
 4. **Open the App**: Open http://localhost:3000 in your browser to view it.
 
